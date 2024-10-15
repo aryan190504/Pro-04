@@ -1,13 +1,11 @@
-
 package in.co.rays.model;
+
 import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import in.co.rays.bean.RoleBean;
 import in.co.rays.bean.UserBean;
 import in.co.rays.util.JDBCDataSource;
 
@@ -205,7 +203,7 @@ public class UserModel {
 
 		Connection conn = JDBCDataSource.getConnection();
 
-		StringBuffer sql = new StringBuffer("select * from user where 1=1");
+		StringBuffer sql = new StringBuffer("select * from st_user where 1=1");
 
 		if (bean != null) {
 			if (bean.getFirstName() != null && bean.getFirstName().length() > 0) {

@@ -1,11 +1,11 @@
 package in.co.rays.model;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import in.co.rays.bean.RoleBean;
 import in.co.rays.util.JDBCDataSource;
 
@@ -134,39 +134,29 @@ public class RoleModel {
 		return bean;
 	}	
 
-	public List search(RoleBean bean, int pageNo, int pageSize) throws Exception {
-
-		StringBuffer sql = new StringBuffer("SELECT * FROM st_role WHERE 1=1");
-
-		if (bean != null) {
-			if (bean.getId() > 0) {
-				sql.append(" AND id = " + bean.getId());
-			}
-			if (bean.getName() != null && bean.getName().length() > 0) {
-				sql.append(" AND NAME like '" + bean.getName() + "%'");
-			}
-			
-		}
-
-		// if page size is greater than zero then apply pagination
-		if (pageSize > 0) {
-			// Calculate start record index
-			pageNo = (pageNo - 1) * pageSize;
-
-			sql.append(" Limit " + pageNo + ", " + pageSize);
-			// sql.append(" limit " + pageNo + "," + pageSize);
-		}
+	public List search(RoleBean bean) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();
+		StringBuffer sql = new StringBuffer("select * from st_role where 1=1");
+
+		if (bean != null) {
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				sql.append(" and Name like '" + bean.getName() + "'");
+
+			}
+		}
+		System.out.println(sql.toString());
+
 		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 
 		ResultSet rs = pstmt.executeQuery();
 
-		ArrayList<RoleBean> list = new ArrayList<RoleBean>();
+		List list = new ArrayList();
 
 		while (rs.next()) {
 			bean = new RoleBean();
-			bean.setId(rs.getLong(1));
+
+			bean.setId(rs.getInt(1));
 			bean.setName(rs.getString(2));
 			bean.setDescription(rs.getString(3));
 			bean.setCreatedBy(rs.getString(4));
@@ -174,8 +164,10 @@ public class RoleModel {
 			bean.setCreatedDatetime(rs.getTimestamp(6));
 			bean.setModifiedDatetime(rs.getTimestamp(7));
 			list.add(bean);
-
 		}
+
 		return list;
+
 	}
+
 }
