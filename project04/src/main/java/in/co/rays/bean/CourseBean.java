@@ -1,17 +1,25 @@
 package in.co.rays.bean;
 
-public class RoleBean extends BaseBean{
-	
+public class CourseBean extends BaseBean {
+
 	private String name;
+	private String duration;
 	private String description;
 
-	
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	public String getDescription() {
@@ -22,9 +30,4 @@ public class RoleBean extends BaseBean{
 		this.description = description;
 	}
 
-	
-
-	}
-
-	
-
+}
