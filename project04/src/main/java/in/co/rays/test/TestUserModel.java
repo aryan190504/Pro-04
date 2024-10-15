@@ -1,27 +1,25 @@
-
 package in.co.rays.test;
 
 import java.sql.Timestamp;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import in.co.rays.bean.RoleBean;
 import in.co.rays.bean.UserBean;
-import in.co.rays.model.RoleModel;
 import in.co.rays.model.UserModel;
 
 public class TestUserModel {
 
 	public static void main(String[] args) throws Exception {
 
-		 testAdd();
+		// testAdd();
 		// testUpdate();
 		// testDelete();
 		// testFindByPk();
 		// testFindByLogin();
-		// testSearch();
+		testSearch();
 	}
 
 	private static void testAdd() throws Exception {
@@ -38,7 +36,7 @@ public class TestUserModel {
 		bean.setMobileNo("987654321");
 		bean.setRoleId(1);
 		bean.setGender("male");
-		bean.setCreatedBy("Aryan@gmail.com");
+		bean.setCreatedBy("admin@gmail.com");
 		bean.setModifiedBy("Aryan");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
@@ -51,7 +49,7 @@ public class TestUserModel {
 	private static void testUpdate() throws Exception {
 
 		UserModel model = new UserModel();
-		UserBean bean = model.findByPK(2);
+		UserBean bean = new UserBean();
 
 		bean.setFirstName("Aryan");
 		bean.setLastName("Shrivastav");
@@ -61,7 +59,7 @@ public class TestUserModel {
 		bean.setMobileNo("987654321");
 		bean.setRoleId(1);
 		bean.setGender("male");
-		bean.setCreatedBy("Aryan@gmail.com");
+		bean.setCreatedBy("admin@gmail.com");
 		bean.setModifiedBy("Aryan");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
 		bean.setModifiedDatetime(new Timestamp(new Date().getTime()));
@@ -113,7 +111,7 @@ public class TestUserModel {
 
 		UserModel model = new UserModel();
 
-		bean = model.findBylogin("aunrag@gmail.com");
+		bean = model.findBylogin("admin@gmail.com");
 
 		if (bean != null) {
 
@@ -132,22 +130,23 @@ public class TestUserModel {
 			System.out.println(bean.getModifiedDatetime());
 		}
 	}
-	private static void testSearch()throws Exception{
-		
-         UserBean bean = new UserBean();
-		
+
+	private static void testSearch() throws Exception {
+
+		UserBean bean = new UserBean();
+
 		UserModel model = new UserModel();
-		
+
 		bean.setFirstName("anurag");
-		
-		List list = model.search(bean, 0, 1);
-		
+
+		List list = model.search(bean, 0,1);
+
 		Iterator it = list.iterator();
-		
-		while(it.hasNext()) {
-			
+
+		while (it.hasNext()) {
+
 			bean = (UserBean) it.next();
-			
+
 			System.out.println(bean.getId());
 			System.out.println(bean.getFirstName());
 			System.out.println(bean.getLastName());
@@ -161,8 +160,8 @@ public class TestUserModel {
 			System.out.println(bean.getModifiedBy());
 			System.out.println(bean.getCreatedDatetime());
 			System.out.println(bean.getModifiedDatetime());
-			
+
 		}
-		
+
 	}
 }
